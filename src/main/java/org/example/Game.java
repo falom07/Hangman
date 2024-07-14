@@ -55,7 +55,6 @@ public class Game {
             if(end == 0){//if end = 0 than your have already guessed all words
                 return true;
             }
-
         }return false;
 
     }
