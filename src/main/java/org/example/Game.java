@@ -1,5 +1,6 @@
 package org.example;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -8,7 +9,7 @@ import java.util.Scanner;
 public class Game {
     static int current_hangman;
     static String word;
-    public static void play() {
+    public static void play() throws FileNotFoundException {
         char symbol = 34;// it is symbol -> "
         int winGame = 0;
         int loseGame = 0;

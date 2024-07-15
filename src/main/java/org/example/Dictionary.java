@@ -1,29 +1,21 @@
 package org.example;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Dictionary {
     private  List<String> listWords = new ArrayList<>();//list with words for game
-    public Dictionary() {//create words for game
-        listWords.add("elephant");
-        listWords.add("computer");
-        listWords.add("building");
-        listWords.add("backpack");
-        listWords.add("umbrella");
-        listWords.add("telescope");
-        listWords.add("furniture");
-        listWords.add("airplane");
-        listWords.add("waterfall");
-        listWords.add("headphones");
-        listWords.add("microphone");
-        listWords.add("landscape");
-        listWords.add("butterfly");
-        listWords.add("generation");
-        listWords.add("telephone");
-        listWords.add("adventure");
-        listWords.add("watermelon");
+    public Dictionary() throws FileNotFoundException {//create words for game
+        File file = new File("dictionary");//take all words from file
+        Scanner scanner = new Scanner(file);
+        while(scanner.hasNextLine()){
+            listWords.add(scanner.nextLine());
+        }
+        scanner.close();
     }
     public String getOneWord(){//take one word for game
         Random random = new Random();
