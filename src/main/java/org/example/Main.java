@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
-        Game.play();//begin game2
+        Game.play();//begin
 
 
 
