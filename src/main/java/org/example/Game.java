@@ -7,20 +7,21 @@ import java.util.Scanner;
 
 public class Game {
     static int current_hangman;
+    static String word;
     public static void play() {
         char symbol = 34;// it is symbol -> "
         int winGame = 0;
         int loseGame = 0;
         while(true){
             Dictionary dictionary = new Dictionary();
-            String word = dictionary.getOneWord();//take word for game
+            word = dictionary.getOneWord();//take word for game
 
             Scanner scanner = new Scanner(System.in);
             System.out.print("\nDo you want play or not? If yes write " + symbol + "YES" + symbol + " if not write anything else: ");
             String answer = scanner.nextLine().toLowerCase();//take answer for begin or end game
 
             if(answer.equals("yes")){//check answer
-                boolean win_game= begin_game(word);//begin game
+                boolean win_game= begin_game();//begin game
                 if(win_game){//text for win
                     System.out.println("\n\n=========================\nYou win!!!\nYour word: " + word);
                     winGame++;
@@ -29,19 +30,30 @@ public class Game {
                     loseGame++;
                 }
             }else {//end game
+                scanner.close();
                 System.out.println("\nWin game: " + winGame + "\nLose game: " + loseGame);
                 break;//end game
             }
 
         }
     }
-    public static boolean begin_game(String word){
-        List<String>open_letters = take_two_random_letter(word);//take two random letter
+    public static boolean begin_game(){
+        List<String>open_letters = take_two_random_letter();//take two random letter
+        List<String>wrong_letter = new ArrayList<>();//list for wrong letter,when user write two the same wrong letter we don't think it like mistake
         int mistake = 0;
+        Scanner scanner = new Scanner(System.in);
         while(mistake < 6){//work until user makes 6 mistakes
-            Scanner scanner = new Scanner(System.in);
             System.out.print("\nEnter possible letter: ");
             String user_letter = scanner.nextLine().toLowerCase();//enter letter
+
+            if(!"abcdefghijklmnopqrstuvwxyz".contains(user_letter)) {//if you write letter not from english alphabet,then just try to write again
+                System.out.println("Invalid letter!!!");
+                continue;
+            }
+            if(wrong_letter.contains(user_letter)){
+                System.out.println("This is wrong letter,but you have already written it ");
+                continue;
+            }
 
             if(word.contains(user_letter)){// if this letter exist than add to list with have already guessed letter and call hangman
                 open_letters.add(user_letter);
@@ -49,16 +61,18 @@ public class Game {
             }else {// if this letter does not exist than ++mistake and call hangman
                 mistake++;
                 call_hangman(true);
+                wrong_letter.add(user_letter);
             }
             System.out.println("\nMistake: " + mistake + "\n=========================\n");
-            int end = write_letter(open_letters,word);//write letters
+            int end = write_letter(open_letters);//write letters
             if(end == 0){//if end = 0 than your have already guessed all words
                 return true;
             }
-        }return false;
+        }
+        return false;
 
     }
-    public static List<String> take_two_random_letter(String word) {//add two random letter for begin
+    public static List<String> take_two_random_letter() {//add two random letter for begin
         Random random = new Random();
         List <String> array_letter = new ArrayList<>();//create List for 2 letter
         array_letter.add("");
@@ -73,7 +87,7 @@ public class Game {
         }
         return array_letter;
     }
-    public static int write_letter(List<String> open_letters,String word){//write letters
+    public static int write_letter(List<String> open_letters){//write letters
         System.out.println();
         int end = 0;
         for(int i = 0;i < word.length();i++){//check all word
