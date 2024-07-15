@@ -8,9 +8,9 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Dictionary {
-    private  List<String> listWords = new ArrayList<>();   //list with words for game
+    private List<String> listWords = new ArrayList<>();
 
-    public Dictionary() throws FileNotFoundException{      //create words for game
+    public Dictionary() throws FileNotFoundException {      //create words for game
         File file = new File("dictionary");       //take all words from file
         Scanner scanner = new Scanner(file);
         while (scanner.hasNextLine()) {
@@ -19,7 +19,7 @@ public class Dictionary {
         scanner.close();
     }
 
-    public String getOneWord(){     //take one word for game
+    public String getOneWord() {
         Random random = new Random();
         int index = random.nextInt(listWords.size());
         return listWords.get(index);

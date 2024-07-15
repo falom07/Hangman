@@ -11,7 +11,7 @@ public class Game {
     static int currentHangman; //state hangman
     static String word;        //Current word for game
 
-    public static void play() throws FileNotFoundException{
+    public static void play() throws FileNotFoundException {
         char symbol = 34;   // it is symbol -> "
         int winGame = 0;    //how much win game
         int loseGame = 0;   //how much lose game
@@ -21,11 +21,11 @@ public class Game {
 
             Scanner scanner = new Scanner(System.in);
             System.out.print("\nDo you want play or not? If yes write "
-                            + symbol + "YES" + symbol + " if not write anything else: ");
+                    + symbol + "YES" + symbol + " if not write anything else: ");
             String answer = scanner.nextLine().toLowerCase();    //take answer for begin or end game
 
             if (answer.equals("yes")) {            //check answer
-                boolean beginGame= beginGame();    //begin game
+                boolean beginGame = beginGame();    //begin game
                 if (beginGame) {                   //text for win
                     System.out.println("\n\n=========================\nYou win!!!\nYour word: " + word);
                     winGame++;
@@ -41,9 +41,9 @@ public class Game {
         }
     }
 
-    public static boolean beginGame(){
-        List<String>openLetters = takeTwoRandomLetter(); //take two random letter
-        List<String>wrongLetter = new ArrayList<>();     //list for wrong letter,when user write two the same wrong letter we don't think it like mistake
+    public static boolean beginGame() {
+        List<String> openLetters = takeTwoRandomLetter(); //take two random letter
+        List<String> wrongLetter = new ArrayList<>();     //list for wrong letter,when user write two the same wrong letter we don't think it like mistake
         int mistake = 0;
         Scanner scanner = new Scanner(System.in);
         while (mistake < 6) {   //work until user makes 6 mistakes
@@ -76,28 +76,29 @@ public class Game {
         return false;
     }
 
-    public static List<String> takeTwoRandomLetter(){   //add two random letter for begin
+    public static List<String> takeTwoRandomLetter() {   //add two random letter for begin
         Random random = new Random();
-        List <String> listLetters = new ArrayList<>();  //create List for 2 letter
+        List<String> listLetters = new ArrayList<>();  //create List for 2 letter
         listLetters.add("");
         listLetters.add("");
 
         for (int i = 0; i < 2; i++) {
             int index = random.nextInt(word.length());              //random index for letter
-            listLetters.set(i,word.substring(index,index+1));       //take letter with our random index
-            if (listLetters.get(1).equals(listLetters.get(0)) ){    //if letters the same,do one more iteration
+            listLetters.set(i, word.substring(index, index + 1));       //take letter with our random index
+            if (listLetters.get(1).equals(listLetters.get(0))) {    //if letters the same,do one more iteration
                 i--;
             }
         }
         return listLetters;
     }
-    public static int writeLetter(List<String> open_letters){   //write letters
+
+    public static int writeLetter(List<String> openLetters) {   //write letters
         System.out.println();
         int end = 0;
-        for(int i = 0; i < word.length(); i++) {   //check all word
-            if (open_letters.contains(word.substring(i,i+1))) {    //check if we have already guessed letter,if yes output
-                System.out.print(" " + word.substring(i,i+1) + " ");
-            }else {
+        for (int i = 0; i < word.length(); i++) {   //check all word
+            if (openLetters.contains(word.substring(i, i + 1))) {    //check if we have already guessed letter,if yes output
+                System.out.print(" " + word.substring(i, i + 1) + " ");
+            } else {
                 end = 1;
                 System.out.print(" _ ");
             }
@@ -105,7 +106,7 @@ public class Game {
         return end;    //if end remain 0 it means that we have already guessed all letter
     }
 
-    public static void callHangman(boolean nextHangman){    //write current hang man
+    public static void callHangman(boolean nextHangman) {    //write current hang man
         if (nextHangman) {
             ++currentHangman;
         }
@@ -136,25 +137,32 @@ public class Game {
                 startHangman();
         }
     }
-    public static void startHangman(){  //get ready hangman
+
+    public static void startHangman() {  //get ready hangman
         System.out.println("______\n|    |\n     |\n     |\n     |\n ____|__");
     }
-    public static void firstHangman(){  //first hangman
+
+    public static void firstHangman() {  //first hangman
         System.out.println("______\n\\    |\n ()  |\n     |\n     |\n ____|__");
     }
-    public static void secondHangman(){
+
+    public static void secondHangman() {
         System.out.println("______\n\\    |\n ()  |\n []  |\n     |\n ____|__");
     }
-    public static void thirdHangman(){
+
+    public static void thirdHangman() {
         System.out.println("______\n\\    |\n ()  |\n/[]  |\n     |\n ____|__");
     }
-    public static void fourthHangman(){
+
+    public static void fourthHangman() {
         System.out.println("______\n\\    |\n ()  |\n/[]\\ |\n     |\n ____|__");
     }
-    public static void fifthHangman(){
+
+    public static void fifthHangman() {
         System.out.println("______\n\\    |\n ()  |\n/[]\\ |\n /   |\n ____|__");
     }
-    public static void deadHangman(){
+
+    public static void deadHangman() {
         System.out.println("______\n\\    |\n ()  |\n/[]\\ |\n /\\  |\n ____|__");
     }
 }
