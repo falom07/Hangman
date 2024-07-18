@@ -41,7 +41,7 @@ public class Game {
         }
     }
 
-    public static boolean beginGame() {
+    private static boolean beginGame() {
         List<String> openLetters = takeTwoRandomLetter(); //take two random letter
         List<String> wrongLetter = new ArrayList<>();     //list for wrong letter,when user write two the same wrong letter we don't think it like mistake
         int mistake = 0;
@@ -76,7 +76,7 @@ public class Game {
         return false;
     }
 
-    public static List<String> takeTwoRandomLetter() {   //add two random letter for begin
+    private static List<String> takeTwoRandomLetter() {   //add two random letter for begin
         Random random = new Random();
         List<String> listLetters = new ArrayList<>();  //create List for 2 letter
         listLetters.add("");
@@ -92,7 +92,7 @@ public class Game {
         return listLetters;
     }
 
-    public static int writeLetter(List<String> openLetters) {   //write letters
+    private static int writeLetter(List<String> openLetters) {   //write letters
         System.out.println();
         int end = 0;
         for (int i = 0; i < word.length(); i++) {   //check all word
@@ -106,7 +106,7 @@ public class Game {
         return end;    //if end remain 0 it means that we have already guessed all letter
     }
 
-    public static void callHangman(boolean nextHangman) {    //write current hang man
+    private static void callHangman(boolean nextHangman) {    //write current hang man
         if (nextHangman) {
             ++currentHangman;
         }
@@ -138,31 +138,31 @@ public class Game {
         }
     }
 
-    public static void startHangman() {  //get ready hangman
+    private static void startHangman() {  //get ready hangman
         System.out.println("______\n|    |\n     |\n     |\n     |\n ____|__");
     }
 
-    public static void firstHangman() {  //first hangman
+    private static void firstHangman() {  //first hangman
         System.out.println("______\n\\    |\n ()  |\n     |\n     |\n ____|__");
     }
 
-    public static void secondHangman() {
+    private static void secondHangman() {
         System.out.println("______\n\\    |\n ()  |\n []  |\n     |\n ____|__");
     }
 
-    public static void thirdHangman() {
+    private static void thirdHangman() {
         System.out.println("______\n\\    |\n ()  |\n/[]  |\n     |\n ____|__");
     }
 
-    public static void fourthHangman() {
+    private static void fourthHangman() {
         System.out.println("______\n\\    |\n ()  |\n/[]\\ |\n     |\n ____|__");
     }
 
-    public static void fifthHangman() {
+    private static void fifthHangman() {
         System.out.println("______\n\\    |\n ()  |\n/[]\\ |\n /   |\n ____|__");
     }
 
-    public static void deadHangman() {
+    private static void deadHangman() {
         System.out.println("______\n\\    |\n ()  |\n/[]\\ |\n /\\  |\n ____|__");
     }
 }
