@@ -131,7 +131,7 @@ public class Game {
                 break;
             case 6:
                 deadHangman();
-                currentHangman = 0;
+                currentHangman = 0;// аннулируем счет для следующей игры
                 break;
             default:
                 startHangman();
